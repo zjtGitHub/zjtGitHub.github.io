@@ -4,7 +4,7 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="404 Not Found:该页无法显示, 前端，博客">
+    <meta name="keywords" content="安卓内嵌webview页面不显示图片, 前端，博客">
     <meta name="description" content="张津童的博客">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>404 Not Found:该页无法显示 | Zjt&#39;s Blog</title>
+    <title>安卓内嵌webview页面不显示图片 | Zjt&#39;s Blog</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/libs/awesome/css/all.css">
@@ -261,12 +261,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/medias/featureimages/14.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/medias/featureimages/13.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">404 Not Found:该页无法显示</h1>
+                    <h1 class="description center-align post-title">安卓内嵌webview页面不显示图片</h1>
                 </div>
             </div>
         </div>
@@ -381,12 +381,29 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/webview/">
+                                <span class="chip bg-color">webview</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/前端/" class="post-category">
+                                前端
+                            </a>
+                        
+                            <a href="/categories/前端/踩坑日记/" class="post-category">
+                                踩坑日记
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -395,7 +412,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2018-12-16
+                    2020-05-24
                 </div>
                 
 
@@ -404,7 +421,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    5
+                    344
                 </div>
                 
 
@@ -416,12 +433,17 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>&lt;!DOCTYPE html&gt;</p>
-<html lang="en"><br><head><meta name="generator" content="Hexo 3.8.0">]\<br><meta charset="UTF-8"><br><title>404</title><br><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head><br><body><br><script type="text/javascript" src="//qzonestyle.gtimg.cn/qzone/hybrid/app/404/search_children.js" charset="utf-8"></script><br></body><br></html>
-
+                <p>今天遇见了一个奇怪的bug，一个上传图片功能使用vant的uploader组件，在pc模拟器试的好好的，但是内嵌到安卓webview页面之后就显示不出来图片了，ios却正常。使用vconsole调试也看不出任何报错，图片上传接口也都正常。一开始以为是vant的这个组件有问题，不兼容安卓，网上查了一圈说是把input中的accept属性给去掉，结果去掉后还是显示不出来。这时测试说生产环境没问题，只有开发和测试环境会这样，我才恍然大悟，会不会是图片地址的问题。生产环境上传图片后的地址都是https的而开发和测试环境的图片地址是http的，安卓是不是有某种机制，不允许https当中加载http资源。一查果然是这样,android webview 从Lollipop(5.0)开始webview默认不允许混合模式，https当中不能加载http资源。解决办法是:</p>
+<pre class=" language-javascript"><code class="language-javascript"><span class="token comment" spellcheck="true">//解决图片加载不出来问题</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>Build<span class="token punctuation">.</span>VERSION<span class="token punctuation">.</span>SDK_INT <span class="token operator">></span> Build<span class="token punctuation">.</span>VERSION_CODES<span class="token punctuation">.</span>LOLLIPOP<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            mBridgeWebView<span class="token punctuation">.</span><span class="token function">getSettings</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setMixedContentMode</span><span class="token punctuation">(</span>WebSettings<span class="token punctuation">.</span>MIXED_CONTENT_ALWAYS_ALLOW<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        mBridgeWebView<span class="token punctuation">.</span><span class="token function">getSettings</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setBlockNetworkImage</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>刚好前阵子遇到了网站配置完ssl证书后https加载http资源的问题，所以很快就想到了这块，不然还会傻不拉几的去查是不是vant的问题，哈哈。</p>
 
             </div>
-            <hr/>
+            <hr>
 
             
 
@@ -431,7 +453,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/webview/">
+                                    <span class="chip bg-color">webview</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -473,37 +499,50 @@
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/404/index.html">
+                <a href="/2020/05/24/an-zhuo-nei-qian-webview-ye-mian-bu-xian-shi-tu-pian/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/medias/featureimages/14.jpg" class="responsive-img" alt="404 Not Found:该页无法显示">
+                        <img src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/medias/featureimages/13.jpg" class="responsive-img" alt="安卓内嵌webview页面不显示图片">
                         
-                        <span class="card-title">404 Not Found:该页无法显示</span>
+                        <span class="card-title">安卓内嵌webview页面不显示图片</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            &lt;!DOCTYPE html&gt;
-]\404
-
-
+                            今天遇见了一个奇怪的bug，一个上传图片功能使用vant的uploader组件，在pc模拟器试的好好的，但是内嵌到安卓webview页面之后就显示不出来图片了，ios却正常。使用vconsole调试也看不出任何报错，图片上传接口也都正常。一
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2018-12-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-24
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            zjt
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/前端/" class="post-category">
+                                    前端
+                                </a>
+                            
+                            <a href="/categories/前端/踩坑日记/" class="post-category">
+                                    踩坑日记
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/webview/">
+                        <span class="chip bg-color">webview</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -511,40 +550,53 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/404/index.html">
+                <a href="/2020/04/20/nodejs-she-zhi-kua-yu-fang-wen/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/medias/featureimages/14.jpg" class="responsive-img" alt="404 Not Found:该页无法显示">
+                        <img src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/medias/featureimages/1.jpg" class="responsive-img" alt="nodejs设置跨域访问">
                         
-                        <span class="card-title">404 Not Found:该页无法显示</span>
+                        <span class="card-title">nodejs设置跨域访问</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            &lt;!DOCTYPE html&gt;
-]\404
+                            设置nodejs允许跨域访问
+const express = require('express');
+const app = express();
 
-
+app.all('*', function(req, res, next) {
+　　//设
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2018-12-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-20
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            zjt
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/踩坑日记/" class="post-category">
+                                    踩坑日记
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Nodejs/">
+                        <span class="chip bg-color">Nodejs</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>

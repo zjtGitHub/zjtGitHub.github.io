@@ -4,8 +4,8 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="node中的require是如何加载模块的, Zjt&#39;s Blog">
-    <meta name="description" content="">
+    <meta name="keywords" content="node中的require是如何加载模块的, 前端，博客">
+    <meta name="description" content="张津童的博客">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,17 +17,17 @@
 
 
     <title>node中的require是如何加载模块的 | Zjt&#39;s Blog</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/favicon.png">
 
-    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
-    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
-    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/matery.css">
-    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/css/my.css">
 
-    <script src="/libs/jquery/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/libs/jquery/jquery.min.js"></script>
 
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
@@ -39,7 +39,7 @@
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/medias/logo.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">Zjt&#39;s Blog</span>
                 </a>
@@ -104,17 +104,6 @@
     
   </li>
   
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/friends" class="waves-effect waves-light">
-      
-      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
-      
-      <span>友情链接</span>
-    </a>
-    
-  </li>
-  
   <li>
     <a href="#searchModal" class="modal-trigger waves-effect waves-light">
       <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
@@ -127,12 +116,12 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/medias/logo.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">Zjt&#39;s Blog</div>
         <div class="logo-desc">
             
-            Never really desperate, only the lost of the soul.
+            张津童的博客
             
         </div>
     </div>
@@ -192,17 +181,6 @@
 			    <i class="fa-fw fas fa-user-circle"></i>
 			
 			关于
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/friends" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-address-book"></i>
-			
-			友情链接
 		</a>
           
         </li>
@@ -283,7 +261,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/medias/featureimages/11.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -301,7 +279,7 @@
 <main class="post-container content">
 
     
-    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/libs/tocbot/tocbot.css">
 <style>
     #articleContent h1::before,
     #articleContent h2::before,
@@ -494,12 +472,9 @@ node_modules<span class="token operator">/</span>express<span class="token opera
                     
                 </div>
                 <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
-                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/libs/share/css/share.min.css">
 <div id="article-share">
 
-    
-    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-    <script src="/libs/share/js/social-share.min.js"></script>
     
 
     
@@ -533,29 +508,25 @@ node_modules<span class="token operator">/</span>express<span class="token opera
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/04/20/nodejs-she-zhi-kua-yu-fang-wen/">
+                <a href="/2020/04/11/jie-jue-https-wang-zhan-jia-zai-http-zi-yuan-xian-shi-bu-an-quan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="nodejs设置跨域访问">
+                        <img src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/medias/featureimages/4.jpg" class="responsive-img" alt="解决https网站加载http资源显示不安全">
                         
-                        <span class="card-title">nodejs设置跨域访问</span>
+                        <span class="card-title">解决https网站加载http资源显示不安全</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            设置nodejs允许跨域访问
-const express = require('express');
-const app = express();
-
-app.all('*', function(req, res, next) {
-　　//设
+                            今天给网站配了ssl证书，按理说网址边上应该会显示一把小锁，但是还是显示的不安全，原来是页面中有一些资源地址是http的，解决方法:在html中head标签中添加
+&lt;meta http-equiv="Content-Security-
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-20
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-11
                         </span>
                         <span class="publish-author">
                             
@@ -572,8 +543,8 @@ app.all('*', function(req, res, next) {
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Nodejs/">
-                        <span class="chip bg-color">Nodejs</span>
+                    <a href="/tags/网站运维/">
+                        <span class="chip bg-color">网站运维</span>
                     </a>
                     
                 </div>
@@ -587,25 +558,31 @@ app.all('*', function(req, res, next) {
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/02/23/vue-zhong-de-nexttick-shi-yong/">
+                <a href="/2019/07/24/webpack-xue-xi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="Vue中的$nextTick使用">
+                        <img src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/medias/featureimages/9.jpg" class="responsive-img" alt="webpack学习">
                         
-                        <span class="card-title">Vue中的$nextTick使用</span>
+                        <span class="card-title">webpack学习</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            定义在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM
-什么情况使用1.Vue生命周期的created()钩子函数进行的DOM操作一定要放在Vue.nextTick()的回调函数中，原因是在c
+                            webpack五大核心概念核心概念入口module.exports = {
+    entry: './path/to/my/enter/file.js'
+};
+/*
+告知webpack从哪个文件开始去阅读去查验代码
+*/
+
+输出const
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-02-23
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-07-24
                             </span>
                         <span class="publish-author">
                             
@@ -622,12 +599,8 @@ app.all('*', function(req, res, next) {
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Vue/">
-                        <span class="chip bg-color">Vue</span>
-                    </a>
-                    
-                    <a href="/tags/Javascript/">
-                        <span class="chip bg-color">Javascript</span>
+                    <a href="/tags/wepacck/">
+                        <span class="chip bg-color">wepacck</span>
                     </a>
                     
                 </div>
@@ -669,7 +642,7 @@ app.all('*', function(req, res, next) {
         var url = document.location.href;
         newdiv.innerHTML += '<br />'
             + '来源: Zjt&#39;s Blog<br />'
-            + '文章作者: Zhang JinTong<br />'
+            + '文章作者: zjt<br />'
             + '文章链接: <a href="' + url + '">' + url + '</a><br />'
             + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
 
@@ -680,21 +653,21 @@ app.all('*', function(req, res, next) {
 
 
 <!-- 代码块功能依赖 -->
-<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/libs/codeBlock/codeBlockFuction.js"></script>
 
 <!-- 代码语言 -->
 
-<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/libs/codeBlock/codeLang.js"></script>
 
 
 <!-- 代码块复制 -->
 
-<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/libs/codeBlock/codeCopy.js"></script>
 
 
 <!-- 代码块收缩 -->
 
-<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/libs/codeBlock/codeShrink.js"></script>
 
 
 <!-- 代码块折行 -->
@@ -718,7 +691,7 @@ app.all('*', function(req, res, next) {
 </div>
 
 
-<script src="/libs/tocbot/tocbot.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/libs/tocbot/tocbot.min.js"></script>
 <script>
     $(function () {
         tocbot.init({
@@ -803,44 +776,11 @@ app.all('*', function(req, res, next) {
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12" server="netease" type="playlist" id="503838841" fixed="true" autoplay="false" theme="#42b983" loop="all" order="random" preload="auto" volume="0.7" list-folded="true">
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
-
-    
     <div class="container row center-align" style="margin-bottom: 15px !important;">
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             <span id="year">2018</span>
-            <a href="/about" target="_blank">Zhang JinTong</a>
+            <a href="/about" target="_blank">zjt</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
@@ -849,7 +789,6 @@ app.all('*', function(req, res, next) {
             
             
             
-            <br>
             
             <span id="sitetime">载入运行时间...</span>
             <script>
@@ -897,6 +836,10 @@ app.all('*', function(req, res, next) {
             
             <br>
             
+            <span id="icp"><img src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/medias/icp.png" style="vertical-align: text-bottom;">
+                <a href="http://www.beian.miit.gov.cn/" target="_blank">津ICP备19007305号</a>
+            </span>
+            
         </div>
         <div class="col s12 m4 l4 social-link ">
     <a href="https://github.com/zjtGitHub" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
@@ -931,7 +874,6 @@ app.all('*', function(req, res, next) {
 
 <div class="progress-bar"></div>
 
-
     <!-- 搜索遮罩框 -->
 <div id="searchModal" class="modal">
     <div class="modal-content">
@@ -943,10 +885,10 @@ app.all('*', function(req, res, next) {
     </div>
 </div>
 
-<script src="/js/search.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/js/search.js"></script>
 <script type="text/javascript">
 $(function () {
-    searchFunc("/search.xml", 'searchInput', 'searchResult');
+    searchFunc("https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/search.xml", 'searchInput', 'searchResult');
 });
 </script>
 
@@ -958,14 +900,24 @@ $(function () {
 </div>
 
 
-    <script src="/libs/materialize/materialize.min.js"></script>
-    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="/libs/aos/aos.js"></script>
-    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="/js/matery.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/libs/materialize/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/libs/aos/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/js/matery.js"></script>
 
     <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?d9dda15061460def9b2ea750b325a1c3";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
 
     <!-- Baidu Push -->
 
@@ -984,7 +936,7 @@ $(function () {
 </script>
 
     
-    <script src="/libs/others/clicklove.js" async="async"></script>
+    <script src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/libs/others/clicklove.js" async="async"></script>
     
     
 
@@ -997,13 +949,13 @@ $(function () {
     
     
     <script type="text/javascript" size="150" alpha='0.6'
-        zIndex="-1" src="/libs/background/ribbon.min.js" async="async"></script>
+        zIndex="-1" src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/libs/background/ribbon.min.js" async="async"></script>
     
 
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/libs/instantpage/instantpage.js" type="module"></script>
     
 
 </body>
