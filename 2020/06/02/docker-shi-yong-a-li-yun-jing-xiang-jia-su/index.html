@@ -4,7 +4,7 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="Vue中的$nextTick使用, 前端，博客">
+    <meta name="keywords" content="docker使用阿里云镜像加速, 前端，博客">
     <meta name="description" content="张津童的博客">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Vue中的$nextTick使用 | Zjt&#39;s Blog</title>
+    <title>docker使用阿里云镜像加速 | Zjt&#39;s Blog</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/libs/awesome/css/all.css">
@@ -261,12 +261,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/medias/featureimages/8.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/medias/featureimages/21.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Vue中的$nextTick使用</h1>
+                    <h1 class="description center-align post-title">docker使用阿里云镜像加速</h1>
                 </div>
             </div>
         </div>
@@ -383,12 +383,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Vue/">
-                                <span class="chip bg-color">Vue</span>
-                            </a>
-                        
-                            <a href="/tags/Javascript/">
-                                <span class="chip bg-color">Javascript</span>
+                            <a href="/tags/docker/">
+                                <span class="chip bg-color">docker</span>
                             </a>
                         
                     </div>
@@ -399,8 +395,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/前端/" class="post-category">
-                                前端
+                            <a href="/categories/服务器/" class="post-category">
+                                服务器
                             </a>
                         
                     </div>
@@ -412,7 +408,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-02-23
+                    2020-06-02
                 </div>
                 
 
@@ -421,7 +417,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    567
+                    47
                 </div>
                 
 
@@ -433,62 +429,11 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM</p>
-<h4 id="什么情况使用"><a href="#什么情况使用" class="headerlink" title="什么情况使用"></a>什么情况使用</h4><p>1.Vue生命周期的created()钩子函数进行的DOM操作一定要放在Vue.nextTick()的回调函数中，原因是在created()钩子函数执行的时候DOM 其实并未进行任何渲染，而此时进行DOM操作无异于徒劳，所以此处一定要将DOM操作的js代码放进Vue.nextTick()的回调函数中。与之对应的就是mounted钩子函数，因为该钩子函数执行时所有的DOM挂载已完成。</p>
-<pre class=" language-javascript"><code class="language-javascript"><span class="token function">created</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">let</span> that<span class="token operator">=</span><span class="token keyword">this</span><span class="token punctuation">;</span>
-    that<span class="token punctuation">.</span><span class="token function">$nextTick</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">//不使用this.$nextTick()方法会报错</span>
-        that<span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>aa<span class="token punctuation">.</span>innerHTML<span class="token operator">=</span><span class="token string">"created中更改了按钮内容"</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//写入到DOM元素</span>
-    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
-
-</code></pre>
-<p>2、当项目中你想在改变DOM元素的数据后基于新的dom做点什么，对新DOM一系列的js操作都需要放进Vue.nextTick()的回调函数中；通俗的理解是：更改数据后当你想立即使用js操作新的视图的时候需要使用它</p>
-<pre class=" language-javascript"><code class="language-javascript"><span class="token operator">&lt;</span>template<span class="token operator">></span>
-  <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"hello"</span><span class="token operator">></span>
-    <span class="token operator">&lt;</span>h3 id<span class="token operator">=</span><span class="token string">"h"</span><span class="token operator">></span><span class="token punctuation">{</span><span class="token punctuation">{</span>testMsg<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>h3<span class="token operator">></span>
-  <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
-<span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span>
-
-<span class="token operator">&lt;</span>script<span class="token operator">></span>
-<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  name<span class="token punctuation">:</span> <span class="token string">'HelloWorld'</span><span class="token punctuation">,</span>
-  data <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> <span class="token punctuation">{</span>
-      testMsg<span class="token punctuation">:</span><span class="token string">"原始值"</span><span class="token punctuation">,</span>
-    <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  methods<span class="token punctuation">:</span><span class="token punctuation">{</span>
-    changeTxt<span class="token punctuation">:</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-      <span class="token keyword">let</span> that<span class="token operator">=</span><span class="token keyword">this</span><span class="token punctuation">;</span>
-      that<span class="token punctuation">.</span>testMsg<span class="token operator">=</span><span class="token string">"修改后的文本值"</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//vue数据改变，改变dom结构</span>
-      <span class="token keyword">let</span> domTxt<span class="token operator">=</span>document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'h'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>innerText<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//后续js对dom的操作</span>
-      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>domTxt<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//输出可以看到vue数据修改后DOM并没有立即更新，后续的dom都不是最新的</span>
-      <span class="token keyword">if</span><span class="token punctuation">(</span>domTxt<span class="token operator">===</span><span class="token string">"原始值"</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"文本data被修改后dom内容没立即更新"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token punctuation">{</span>
-        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"文本data被修改后dom内容被马上更新了"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span><span class="token punctuation">,</span>
-
-  <span class="token punctuation">}</span>
+                <pre class=" language-bash"><code class="language-bash"><span class="token function">vi</span> /etc/docker/daemon.json
+<span class="token punctuation">{</span>
+    <span class="token string">"registry-mirrors"</span><span class="token keyword">:</span> <span class="token punctuation">[</span><span class="token string">"https://registry.docker-cn.com"</span><span class="token punctuation">]</span>
 <span class="token punctuation">}</span>
-</code></pre>
-<p>正确的用法是：vue改变dom元素结构后使用vue.$nextTick()方法来实现dom数据更新后延迟执行后续代码</p>
-<pre class=" language-javascript"><code class="language-javascript">changeTxt<span class="token punctuation">:</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-      <span class="token keyword">let</span> that<span class="token operator">=</span><span class="token keyword">this</span><span class="token punctuation">;</span>
-      that<span class="token punctuation">.</span>testMsg<span class="token operator">=</span><span class="token string">"修改后的文本值"</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//修改dom结构</span>
-
-      that<span class="token punctuation">.</span><span class="token function">$nextTick</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>  <span class="token comment" spellcheck="true">//使用vue.$nextTick()方法可以dom数据更新后延迟执行</span>
-        <span class="token keyword">let</span> domTxt<span class="token operator">=</span>document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'h'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>innerText<span class="token punctuation">;</span> 
-        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>domTxt<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//输出可以看到vue数据修改后并没有DOM没有立即更新，</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span>domTxt<span class="token operator">===</span><span class="token string">"原始值"</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-          console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"文本data被修改后dom内容没立即更新"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token punctuation">{</span>
-          console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"文本data被修改后dom内容被马上更新了"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+进入阿里云容器镜像服务中，在镜像中心的镜像加速器下有一个加速地址，填入即可
 </code></pre>
 
             </div>
@@ -503,12 +448,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Vue/">
-                                    <span class="chip bg-color">Vue</span>
-                                </a>
-                            
-                                <a href="/tags/Javascript/">
-                                    <span class="chip bg-color">Javascript</span>
+                                <a href="/tags/docker/">
+                                    <span class="chip bg-color">docker</span>
                                 </a>
                             
                         </div>
@@ -549,51 +490,50 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/07/24/webpack-xue-xi/">
+                <a href="/2020/06/02/docker-shi-yong-a-li-yun-jing-xiang-jia-su/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/medias/featureimages/9.jpg" class="responsive-img" alt="webpack学习">
+                        <img src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/medias/featureimages/21.jpg" class="responsive-img" alt="docker使用阿里云镜像加速">
                         
-                        <span class="card-title">webpack学习</span>
+                        <span class="card-title">docker使用阿里云镜像加速</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            webpack五大核心概念核心概念入口module.exports = {
-    entry: './path/to/my/enter/file.js'
-};
-/*
-告知webpack从哪个文件开始去阅读去查验代码
-*/
-
-输出const
+                            vi /etc/docker/daemon.json
+{
+    "registry-mirrors": ["https://registry.docker-cn.com"]
+}
+进入阿里云容器镜像服务中，在镜像中心的镜像加速器下有一个加速
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-07-24
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-02
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/前端/" class="post-category">
-                                    前端
+                            <a href="/categories/服务器/" class="post-category">
+                                    服务器
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/wepacck/">
-                        <span class="chip bg-color">wepacck</span>
+                    <a href="/tags/docker/">
+                        <span class="chip bg-color">docker</span>
                     </a>
                     
                 </div>
@@ -607,27 +547,24 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/01/15/computed-methods-watch-qu-bie/">
+                <a href="/2020/05/24/an-zhuo-nei-qian-webview-ye-mian-bu-xian-shi-tu-pian/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/medias/featureimages/1.jpg" class="responsive-img" alt="computed,methods,watch区别">
+                        <img src="https://cdn.jsdelivr.net/gh/zjtGitHub/zjtGitHub.github.io/medias/featureimages/13.jpg" class="responsive-img" alt="安卓内嵌webview页面不显示图片">
                         
-                        <span class="card-title">computed,methods,watch区别</span>
+                        <span class="card-title">安卓内嵌webview页面不显示图片</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            区别
-computed属性的结果会被缓存，除非依赖的响应式属性变化才会重新计算。主要当作属性来使用；
-methods方法表示一个具体的操作，主要书写业务逻辑；
-watch一个对象，键是需要观察的表达式，值是对应回调函数。主要用来监听某些特定
+                            今天遇见了一个奇怪的bug，一个上传图片功能使用vant的uploader组件，在pc模拟器试的好好的，但是内嵌到安卓webview页面之后就显示不出来图片了，ios却正常。使用vconsole调试也看不出任何报错，图片上传接口也都正常。一
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-01-15
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-24
                             </span>
                         <span class="publish-author">
                             
@@ -637,6 +574,10 @@ watch一个对象，键是需要观察的表达式，值是对应回调函数。
                                     前端
                                 </a>
                             
+                            <a href="/categories/前端/踩坑日记/" class="post-category">
+                                    踩坑日记
+                                </a>
+                            
                             
                         </span>
                     </div>
@@ -644,8 +585,8 @@ watch一个对象，键是需要观察的表达式，值是对应回调函数。
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/vue/">
-                        <span class="chip bg-color">vue</span>
+                    <a href="/tags/webview/">
+                        <span class="chip bg-color">webview</span>
                     </a>
                     
                 </div>
