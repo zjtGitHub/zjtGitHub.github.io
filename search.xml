@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>prettier，husky，commitlint配置</title>
+      <link href="/2022/03/06/prettier/"/>
+      <url>/2022/03/06/prettier/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> 常用配置 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Typescript 学习笔记 1</title>
       <link href="/2022/03/06/typescript/"/>
       <url>/2022/03/06/typescript/</url>
@@ -23,25 +42,6 @@
             <tag> Typescript </tag>
             
         </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>prettier，husky，commitlint配置</title>
-      <link href="/2022/03/06/prettier/"/>
-      <url>/2022/03/06/prettier/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      <categories>
-          
-          <category> 常用配置 </category>
-          
-      </categories>
-      
       
     </entry>
     
