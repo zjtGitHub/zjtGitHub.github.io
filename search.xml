@@ -4,50 +4,6 @@
   
     
     <entry>
-      <title>prettier，husky，commitlint配置</title>
-      <link href="/2022/03/06/prettier/"/>
-      <url>/2022/03/06/prettier/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      <categories>
-          
-          <category> 常用配置 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Typescript 学习笔记 1</title>
-      <link href="/2022/03/06/typescript/"/>
-      <url>/2022/03/06/typescript/</url>
-      
-        <content type="html"><![CDATA[<h1 id="类"><a href="#类" class="headerlink" title="类"></a>类</h1><h2 id="公共，私有与受保护的修饰符"><a href="#公共，私有与受保护的修饰符" class="headerlink" title="公共，私有与受保护的修饰符"></a>公共，私有与受保护的修饰符</h2><p><strong>默认<code>public</code></strong></p><p>默认所有属性都是<code>public</code>，可以自由访问</p><p><strong>私有<code>private</code></strong></p><p>当成员被标记成 <code>private</code>时，它就不能在声明它的类的外部访问。</p><p><strong>理解 <code>protected</code></strong></p><p><code>protected</code>修饰符与 <code>private</code>修饰符的行为很相似，但有一点不同， <code>protected</code>成员在派生类中仍然可以访问。</p><h5 id="readonly修饰符"><a href="#readonly修饰符" class="headerlink" title="readonly修饰符"></a><strong><code>readonly</code>修饰符</strong></h5><p>只读</p><h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><p><strong>约束泛型</strong></p><p>必须有 length 属性</p><pre class=" language-tsx"><code class="language-tsx">interface IWithLength {  length: number}function echoWithLength<T extends IWithLength>(arg: T): T {  console.log(arg.length)  return arg}echoWithLength('asdf')</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> 学习笔记 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Typescript </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>多个echart图表添加resize事件</title>
       <link href="/2021/08/19/duo-ge-echart-tu-biao-tian-jia-resize-shi-jian/"/>
       <url>/2021/08/19/duo-ge-echart-tu-biao-tian-jia-resize-shi-jian/</url>
