@@ -12,6 +12,56 @@
       
       
       
+        <tags>
+            
+            <tag> Vue </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>linux路径正则表达式匹配</title>
+      <link href="/2021/06/15/linux-lu-jing-zheng-ze-biao-da-shi-pi-pei/"/>
+      <url>/2021/06/15/linux-lu-jing-zheng-ze-biao-da-shi-pi-pei/</url>
+      
+        <content type="html"><![CDATA[<p>开发时遇到表单需要校验linux文件路径，要求是开头必须是/，中间不能有空格和特殊符号，结尾可以是文件或是文件夹<br><strong>正确格式</strong></p><pre><code>//文件夹/文件夹//文件夹/process.yml</code></pre><p><strong>错误格式</strong></p><pre><code>opt/opt///opt/asd?</code></pre><p><strong>表达式</strong></p><pre><code>/(^\/)([^\\:*&lt;&gt;|&quot;?\r\n\s/]+\/)*([^\\:*&lt;&gt;|&quot;?\r\n\s/]+)?$/</code></pre><p>其中<code>(^\/)</code>表示开头的<code>/</code>&gt;</p><p><code>([^\\:*&lt;&gt;|&quot;?\r\n/.]+\/)*</code>中的<code>^\\:*&lt;&gt;|&quot;?\r\n/.</code>表示除了这些特殊字符以外的字符，而且不能为空名，所以后面要有个<code>+</code>，<code>*</code>表示<code>文件夹/</code>可以有零个或多个</p><p>路径最后一部分可以是文件夹或文件名，表达式和前面一样<code>?</code>表示零个或一个。</p><p>最后附上一个正则校验网址<a href="https://regexr.com/" target="_blank" rel="noopener">网址</a>，里面的表达式都是可视化的，看起来很清楚。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 正则 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>jenkins没有执行docker权限问题</title>
+      <link href="/2021/05/08/jenkins-mei-you-zhi-xing-docker-quan-xian-wen-ti/"/>
+      <url>/2021/05/08/jenkins-mei-you-zhi-xing-docker-quan-xian-wen-ti/</url>
+      
+        <content type="html"><![CDATA[<pre class=" language-shell"><code class="language-shell">docker: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post http://%2Fvar%2Frun%2Fdocker.sock/v1.24/containers/create?name=web_test: dial unix /var/run/docker.sock: connect: permission denied.</code></pre><p><img src="/.io//1.png" alt="微信截图_20210508140329.png"><br>今天在使用jenkins构建项目时出现了这个报错</p><h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p><code>jenkins</code> 没有 <code>docker</code> 的执行权限</p><h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>使用 <code>cat /etc/group</code> 命令发现 <code>docker</code> 的用户组id是992，而 <code>docker-compose.yml</code> 文件中</p><pre class=" language-shell"><code class="language-shell">services:  jenkins:    container_name: 'jenkins'    image: jenkins/jenkins:lts    restart: always    user: jenkins:994</code></pre><p>是这样写的，所以jenkins和docker不在一个用户组中，修改994为992，之后重启jenkins镜像即可。</p><pre class=" language-shell"><code class="language-shell">docker-compose stopdocker-compose up -d --build</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 踩坑日记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 网站运维 </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -34,6 +84,33 @@
         <tags>
             
             <tag> Git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>记一次vue项目ie兼容性问题</title>
+      <link href="/2020/11/09/ji-yi-ci-vue-xiang-mu-ie-jian-rong-xing-wen-ti/"/>
+      <url>/2020/11/09/ji-yi-ci-vue-xiang-mu-ie-jian-rong-xing-wen-ti/</url>
+      
+        <content type="html"><![CDATA[<p>项目是使用公司自己的脚手架搭建的，其中引入了基于element-ui修改的ui框架。在ie中白屏显示，并且报错。</p><pre><code>SCRIPT1028: SCRIPT1028: Expected identifier, string or number</code></pre><p>查看公司文档后发现需要在vue.config.js中添加<code>transpileDependencies</code>参数配置</p><pre class=" language-js"><code class="language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>  transpileDependencies<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'@pillarjs'</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><p>因为babel默认只转义src中的文件，加上<code>transpileDependencies</code>后，可以为<code>node_modules</code>中的依赖开启转换。</p><p>本以为这就完事了，结果发现不仅ie没起作用，就连chrome都报错了。。。</p><p>chrome报错:</p><pre><code>Uncaught TypeError: Cannot assign to read only property &#39;exports&#39; of object &#39;#&lt;Object&gt;&#39;</code></pre><p>ie报错:</p><pre><code>Assignment to read-only properties is not allowed in strict mode</code></pre><p>原因是import和module.exports混用了,所以webpack报错了。</p><p>查了半天网上的解决办法都没用，直到看到<a href="https://blog.csdn.net/qq_41619796/article/details/108076869" target="_blank" rel="noopener">这篇文章</a>。</p><p>在babel.config.js里面加unambiguous属性</p><pre class=" language-js"><code class="language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>  presets<span class="token punctuation">:</span> <span class="token punctuation">[</span>    <span class="token string">'@vue/app'</span>  <span class="token punctuation">]</span><span class="token punctuation">,</span>  sourceType<span class="token punctuation">:</span> <span class="token string">'unambiguous'</span><span class="token punctuation">}</span></code></pre><p>让babel和webpack一样严格区分commonJS文件和ES6文件。</p><p>改完之后chrome正常了，edge浏览器也能看了但是ie还是不行。报错<code>SCRIPT1002: 语法错误 chunk-vendors.js (9461,3)</code>,没办法只能点进去看到底是什么问题。</p><p>后来发现是element-ui和vue-particles的问题，于是在<code>transpileDependencies</code>中又添加了这两个依赖。</p><p>重启项目，ok了。但是很奇怪啊，为什么element-ui也需要加进去，别的使用element-ui的项目也没加，ie就可以看啊？难道是因为@pillarjs这个依赖使用了element-ui的原因？</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 踩坑日记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Vue </tag>
+            
+            <tag> 浏览器兼容 </tag>
             
         </tags>
       
@@ -111,6 +188,31 @@
         <tags>
             
             <tag> Nodejs </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>云服务器安全组CIDR配置</title>
+      <link href="/2020/04/18/yun-fu-wu-qi-an-quan-zu-cidr-pei-zhi/"/>
+      <url>/2020/04/18/yun-fu-wu-qi-an-quan-zu-cidr-pei-zhi/</url>
+      
+        <content type="html"><![CDATA[<p>首先把 IP 地址转成 8 位二进制，（ 192.168.1.6 就变成了 11000000.10101000.00000001.00000110 ）。<br>然后 /8 就表示匹配前面 8 位和这个一样，后面 24 位任意的 IP 。<br>/16 就表示匹配前面 16 位和这个一样，后面 16 位任意的 IP 。<br>/24 就表示匹配前面 24 位和这个一样，后面 8 位任意的 IP 。<br>/32 就表示匹配所有 32 位和这个都一样的 IP，也就是仅匹配这一个 IP 。<br>/0 就表示匹配所有 32 位都任意的 IP，也就是匹配任意 IP 地址。<br>/ 后面跟任意 [0, 32] 之间的数，表示匹配前面 n 位一样，后面的 32 - n 位任意的 IP 。<br>实际写的时候，通常把后面 32 - n 位归零，然后再转回十进制。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 踩坑日记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 网站运维 </tag>
             
         </tags>
       
@@ -256,7 +358,7 @@
       
         <tags>
             
-            <tag> vue </tag>
+            <tag> Vue </tag>
             
         </tags>
       

@@ -4,7 +4,7 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="Typescript 学习笔记 1, 前端，博客">
+    <meta name="keywords" content="记一次vue项目ie兼容性问题, 前端，博客">
     <meta name="description" content="技术分享">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Typescript 学习笔记 1 | Zjt&#39;s Blog</title>
+    <title>记一次vue项目ie兼容性问题 | Zjt&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -261,12 +261,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Typescript 学习笔记 1</h1>
+                    <h1 class="description center-align post-title">记一次vue项目ie兼容性问题</h1>
                 </div>
             </div>
         </div>
@@ -383,8 +383,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Typescript/">
-                                <span class="chip bg-color">Typescript</span>
+                            <a href="/tags/Vue/">
+                                <span class="chip bg-color">Vue</span>
+                            </a>
+                        
+                            <a href="/tags/浏览器兼容/">
+                                <span class="chip bg-color">浏览器兼容</span>
                             </a>
                         
                     </div>
@@ -395,8 +399,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/学习笔记/" class="post-category">
-                                学习笔记
+                            <a href="/categories/踩坑日记/" class="post-category">
+                                踩坑日记
                             </a>
                         
                     </div>
@@ -408,7 +412,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-06
+                    2020-11-09
                 </div>
                 
 
@@ -417,7 +421,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    131
+                    364
                 </div>
                 
 
@@ -429,24 +433,33 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="类"><a href="#类" class="headerlink" title="类"></a>类</h1><h2 id="公共，私有与受保护的修饰符"><a href="#公共，私有与受保护的修饰符" class="headerlink" title="公共，私有与受保护的修饰符"></a>公共，私有与受保护的修饰符</h2><p><strong>默认<code>public</code></strong></p>
-<p>默认所有属性都是<code>public</code>，可以自由访问</p>
-<p><strong>私有<code>private</code></strong></p>
-<p>当成员被标记成 <code>private</code>时，它就不能在声明它的类的外部访问。</p>
-<p><strong>理解 <code>protected</code></strong></p>
-<p><code>protected</code>修饰符与 <code>private</code>修饰符的行为很相似，但有一点不同， <code>protected</code>成员在派生类中仍然可以访问。</p>
-<h5 id="readonly修饰符"><a href="#readonly修饰符" class="headerlink" title="readonly修饰符"></a><strong><code>readonly</code>修饰符</strong></h5><p>只读</p>
-<h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><p><strong>约束泛型</strong></p>
-<p>必须有 length 属性</p>
-<pre class=" language-tsx"><code class="language-tsx">interface IWithLength {
-  length: number
-}
-function echoWithLength<t extends="" iwithlength="">(arg: T): T {
-  console.log(arg.length)
-  return arg
-}
-echoWithLength('asdf')
-</t></code></pre>
+                <p>项目是使用公司自己的脚手架搭建的，其中引入了基于element-ui修改的ui框架。在ie中白屏显示，并且报错。</p>
+<pre><code>SCRIPT1028: SCRIPT1028: Expected identifier, string or number
+</code></pre><p>查看公司文档后发现需要在vue.config.js中添加<code>transpileDependencies</code>参数配置</p>
+<pre class=" language-js"><code class="language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  transpileDependencies<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'@pillarjs'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<p>因为babel默认只转义src中的文件，加上<code>transpileDependencies</code>后，可以为<code>node_modules</code>中的依赖开启转换。</p>
+<p>本以为这就完事了，结果发现不仅ie没起作用，就连chrome都报错了。。。</p>
+<p>chrome报错:</p>
+<pre><code>Uncaught TypeError: Cannot assign to read only property &#39;exports&#39; of object &#39;#&lt;Object&gt;&#39;
+</code></pre><p>ie报错:</p>
+<pre><code>Assignment to read-only properties is not allowed in strict mode
+</code></pre><p>原因是import和module.exports混用了,所以webpack报错了。</p>
+<p>查了半天网上的解决办法都没用，直到看到<a href="https://blog.csdn.net/qq_41619796/article/details/108076869" target="_blank" rel="noopener">这篇文章</a>。</p>
+<p>在babel.config.js里面加unambiguous属性</p>
+<pre class=" language-js"><code class="language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  presets<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token string">'@vue/app'</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  sourceType<span class="token punctuation">:</span> <span class="token string">'unambiguous'</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>让babel和webpack一样严格区分commonJS文件和ES6文件。</p>
+<p>改完之后chrome正常了，edge浏览器也能看了但是ie还是不行。报错<code>SCRIPT1002: 语法错误 chunk-vendors.js (9461,3)</code>,没办法只能点进去看到底是什么问题。</p>
+<p>后来发现是element-ui和vue-particles的问题，于是在<code>transpileDependencies</code>中又添加了这两个依赖。</p>
+<p>重启项目，ok了。但是很奇怪啊，为什么element-ui也需要加进去，别的使用element-ui的项目也没加，ie就可以看啊？难道是因为@pillarjs这个依赖使用了element-ui的原因？</p>
 
             </div>
             <hr>
@@ -460,8 +473,12 @@ echoWithLength('asdf')
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Typescript/">
-                                    <span class="chip bg-color">Typescript</span>
+                                <a href="/tags/Vue/">
+                                    <span class="chip bg-color">Vue</span>
+                                </a>
+                            
+                                <a href="/tags/浏览器兼容/">
+                                    <span class="chip bg-color">浏览器兼容</span>
                                 </a>
                             
                         </div>
@@ -504,36 +521,46 @@ echoWithLength('asdf')
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/03/06/prettier/">
+                <a href="/2020/12/18/shan-chu-git-zhong-de-min-gan-ti-jiao-ji-lu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="prettier，husky，commitlint配置">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="删除git中的敏感提交记录">
                         
-                        <span class="card-title">prettier，husky，commitlint配置</span>
+                        <span class="card-title">删除git中的敏感提交记录</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            有时提交 git 时会不小心把数据库密码这样一些敏感内容也给提交上去，这是很危险的，及时删除了文件，在提交记录中也会找到这些敏感内容，所以我们就需要在提交记录中彻底删除和这个文件相关的内容
+github 官网有这样一篇文章
+执行命令之前记得
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-06
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-12-18
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/常用配置/" class="post-category">
-                                    常用配置
+                            <a href="/categories/踩坑日记/" class="post-category">
+                                    踩坑日记
                                 </a>
                             
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Git/">
+                        <span class="chip bg-color">Git</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -545,34 +572,48 @@ echoWithLength('asdf')
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/08/19/duo-ge-echart-tu-biao-tian-jia-resize-shi-jian/">
+                <a href="/2020/06/02/docker-shi-yong-a-li-yun-jing-xiang-jia-su/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="多个echart图表添加resize事件">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="docker使用阿里云镜像加速">
                         
-                        <span class="card-title">多个echart图表添加resize事件</span>
+                        <span class="card-title">docker使用阿里云镜像加速</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            由于我的图表都是循环渲染出来的，一开始是在每个循环当中添加的 resize 事件
-const chartDom = document.getElementById('chart' + item.id)
-this['chartDom' + i
+                            vi /etc/docker/daemon.json
+{
+    "registry-mirrors": ["https://registry.docker-cn.com"]
+}
+进入阿里云容器镜像服务中，在镜像中心的镜像加速器下有一个加速
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-19
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-02
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            zjt
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/服务器/" class="post-category">
+                                    服务器
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/docker/">
+                        <span class="chip bg-color">docker</span>
+                    </a>
+                    
                 </div>
                 
             </div>

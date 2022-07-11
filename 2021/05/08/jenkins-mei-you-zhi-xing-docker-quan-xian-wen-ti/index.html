@@ -4,7 +4,7 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="prettier，husky，commitlint配置, 前端，博客">
+    <meta name="keywords" content="jenkins没有执行docker权限问题, 前端，博客">
     <meta name="description" content="技术分享">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>prettier，husky，commitlint配置 | Zjt&#39;s Blog</title>
+    <title>jenkins没有执行docker权限问题 | Zjt&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -261,12 +261,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">prettier，husky，commitlint配置</h1>
+                    <h1 class="description center-align post-title">jenkins没有执行docker权限问题</h1>
                 </div>
             </div>
         </div>
@@ -381,9 +381,13 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/网站运维/">
+                                <span class="chip bg-color">网站运维</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -391,8 +395,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/常用配置/" class="post-category">
-                                常用配置
+                            <a href="/categories/踩坑日记/" class="post-category">
+                                踩坑日记
                             </a>
                         
                     </div>
@@ -404,7 +408,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-06
+                    2021-05-08
                 </div>
                 
 
@@ -413,7 +417,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    145
                 </div>
                 
 
@@ -425,7 +429,23 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <pre class=" language-shell"><code class="language-shell">docker: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post http://%2Fvar%2Frun%2Fdocker.sock/v1.24/containers/create?name=web_test: dial unix /var/run/docker.sock: connect: permission denied.
+</code></pre>
+<p><img src="/.io//1.png" alt="微信截图_20210508140329.png"><br>今天在使用jenkins构建项目时出现了这个报错</p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p><code>jenkins</code> 没有 <code>docker</code> 的执行权限</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>使用 <code>cat /etc/group</code> 命令发现 <code>docker</code> 的用户组id是992，而 <code>docker-compose.yml</code> 文件中</p>
+<pre class=" language-shell"><code class="language-shell">services:
+  jenkins:
+    container_name: 'jenkins'
+    image: jenkins/jenkins:lts
+    restart: always
+    user: jenkins:994
+</code></pre>
+<p>是这样写的，所以jenkins和docker不在一个用户组中，修改994为992，之后重启jenkins镜像即可。</p>
+<pre class=" language-shell"><code class="language-shell">docker-compose stop
+docker-compose up -d --build
+</code></pre>
+
             </div>
             <hr>
 
@@ -437,7 +457,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/网站运维/">
+                                    <span class="chip bg-color">网站运维</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -476,41 +500,52 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/03/06/prettier/">
+                <a href="/2021/06/15/linux-lu-jing-zheng-ze-biao-da-shi-pi-pei/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="prettier，husky，commitlint配置">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="linux路径正则表达式匹配">
                         
-                        <span class="card-title">prettier，husky，commitlint配置</span>
+                        <span class="card-title">linux路径正则表达式匹配</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            开发时遇到表单需要校验linux文件路径，要求是开头必须是/，中间不能有空格和特殊符号，结尾可以是文件或是文件夹正确格式
+/
+/文件夹
+/文件夹/
+/文件夹/process.yml
+错误格式
+opt
+/opt//
+/opt/asd?
+表达式
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-06
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-06-15
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/常用配置/" class="post-category">
-                                    常用配置
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            zjt
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/正则/">
+                        <span class="chip bg-color">正则</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -521,36 +556,33 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/06/typescript/">
+                <a href="/2020/12/18/shan-chu-git-zhong-de-min-gan-ti-jiao-ji-lu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Typescript 学习笔记 1">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="删除git中的敏感提交记录">
                         
-                        <span class="card-title">Typescript 学习笔记 1</span>
+                        <span class="card-title">删除git中的敏感提交记录</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            类公共，私有与受保护的修饰符默认public
-默认所有属性都是public，可以自由访问
-私有private
-当成员被标记成 private时，它就不能在声明它的类的外部访问。
-理解 protected
-protected修饰符与 priv
+                            有时提交 git 时会不小心把数据库密码这样一些敏感内容也给提交上去，这是很危险的，及时删除了文件，在提交记录中也会找到这些敏感内容，所以我们就需要在提交记录中彻底删除和这个文件相关的内容
+github 官网有这样一篇文章
+执行命令之前记得
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-06
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-18
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/学习笔记/" class="post-category">
-                                    学习笔记
+                            <a href="/categories/踩坑日记/" class="post-category">
+                                    踩坑日记
                                 </a>
                             
                             
@@ -560,8 +592,8 @@ protected修饰符与 priv
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Typescript/">
-                        <span class="chip bg-color">Typescript</span>
+                    <a href="/tags/Git/">
+                        <span class="chip bg-color">Git</span>
                     </a>
                     
                 </div>
